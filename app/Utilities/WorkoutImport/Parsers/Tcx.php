@@ -49,6 +49,16 @@ class Tcx extends Parser implements \Iterator, ParserInterface
                     if (!empty($trkpt->HeartRateBpm)) {
                         $point->setHeartRate(intval($trkpt->HeartRateBpm->Value));
                     }
+                    ##
+					if (!empty($trkpt->Extensions->TPX->Watts)) {
+                        $point->setPower($trkpt->Extensions->TPX->Watts);
+                    };
+					
+                    if (!empty($trkpt->Cadence)) {
+                        $point->setCadence($trkpt->Cadence);
+                    };
+                    
+					##
                     $this->points[] = $point;
                 }
 
