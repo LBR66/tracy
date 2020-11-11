@@ -32,6 +32,10 @@ class Point
 
     private $segmentIndex;
 
+    private $power;
+	
+	private $cadence;
+
     /**
      * @return mixed
      */
@@ -122,6 +126,39 @@ class Point
     {
         $this->heartRate = $heartRate;
     }
+
+#
+  /**
+     * @return int
+     */
+    public function getPower()
+    {
+        return $this->power;
+    }
+
+       /**
+     * @param int $power
+     */
+    public function setPower($power)
+    {
+        $this->power = $power;
+    }
+    
+    /**
+     * @param int $cadence
+     */
+    public function setCadence($cadence)
+    {
+        $this->cadence = $cadence;
+    }
+    
+    /** @return int
+    */
+    public function getCadence()
+    {
+        return $this->cadence;
+    }   
+##
 
     /**
      * @return \DateTime

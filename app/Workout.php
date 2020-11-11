@@ -58,7 +58,8 @@ class Workout extends Model
                 max(points.heart_rate) as max_hr,
                 avg(points.heart_rate) as avg_hr,
                 min(points.elevation) as min_elevation,
-                max(points.elevation) as max_elevation'
+                max(points.elevation) as max_elevation,
+                max(points.power) 	  as max_power'
             ))
                 ->join('points AS B', function ($join) {
                     $join->on('points.index', '=', DB::raw('B.index - 1'));
@@ -176,6 +177,8 @@ class Workout extends Model
                 'coordinates' => $point,
                 'heart_rate' => $point->getHeartRate(),
                 'elevation' => $point->getEvelation(),
+				'power' => $point->getPower(),
+                'cadence' => $point->getCadence(),
                 'time' => $point->getTime()->setTimeZone(new \DateTimeZone('UTC')),
             ]);
         }
