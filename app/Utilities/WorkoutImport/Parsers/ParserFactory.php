@@ -13,6 +13,7 @@ class ParserFactory
 {
     const PARSER_GPX = Gpx::class;
     const PARSER_TCX = Tcx::class;
+    const PARSER_EGE = Ege::class;
 
     /**
      * @param string $file
@@ -29,7 +30,10 @@ class ParserFactory
                 $parserType = self::PARSER_TCX;
             } elseif (isset($xml->trk->trkseg)) {
                 $parserType = self::PARSER_GPX;
-            } else {
+            } elseif (isset($xml->entries->entry)) {
+                $parserType = self::PARSER_EGE;
+            }           
+            else {
                 throw new Exception('Parser not available for the given file!');
             }
         } else {

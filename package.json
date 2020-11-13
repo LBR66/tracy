@@ -12,13 +12,19 @@
     "devDependencies": {
         "axios": "^0.18.1",
         "bootstrap": "^4.5.3",
-        "cross-env": "^5.1",
+        "cross-env": "^5.2.1",
         "jquery": "^3.5.1",
         "laravel-mix": "^5.0.9",
         "lodash": "^4.17.20",
-        "popper.js": "^1.12",
-        "vue": "^2.5.7",
-        "vue2-datepicker": "^3.3.0"
+        "popper.js": "^1.16.1",
+        "resolve-url-loader": "^3.1.2",
+        "sass": "^1.29.0",
+        "sass-loader": "^8.0.2",
+        "vue": "^2.6.12",
+        "vue-template-compiler": "^2.6.12",
+        "vue2-datepicker": "^3.7.0"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@popperjs/core": "^2.5.4"
+    }
 }
