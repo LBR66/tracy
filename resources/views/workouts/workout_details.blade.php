@@ -13,6 +13,10 @@
                         <div>Distance: <h5>{{$workout->distance}} km</h5></div>
                         <div>Duration: <h5>{{$workout->duration}}</h5></div>
                         <div>Average speed: <h5>{{$workout->avgspeed}} km/h</h5></div>
+                        <div>Max power: <h5>{{$workout->max_power}} W</h5></div>
+                        <div>Average power: <h5>{{$workout->avg_power}} W</h5></div>
+                        <div>Average cadence: <h5>{{$workout->avg_cadence}} rpm</h5></div>
+                        <div>Energy: <h5>{{$workout->sum_energy}} kJ</h5></div>
                     </div>
                     <div class="col-6">
                         <div>Min elevation: <h5>{{$workout->minelevation}} m</h5></div>
@@ -20,6 +24,7 @@
                         <div>Average heart rate: <h5>{{$workout->avghr}} bpm</h5></div>
                         <div>Min heart rate: <h5>{{$workout->minhr}} bpm</h5></div>
                         <div>Max heart rate: <h5>{{$workout->maxhr}} bpm</h5></div>
+                        <div>Average heart rate: <h5>{{$workout->avghr}} bpm</h5></div>
                     </div>
                 </div>
             </div>

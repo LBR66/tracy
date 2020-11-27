@@ -19,7 +19,11 @@
                 <th>Type</th>
                 <th>Date</th>
                 <th>Distance</th>
+                <th>Speed</th>
                 <th>Duration</th>
+                <th>Energy</th>
+                <th>Avg. Power</th>
+                <th>Heartrate</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -30,7 +34,11 @@
                 <td class="p-2">{{$workout->type}}</td>
                 <td class="p-2">{{$workout->time}}</td>
                 <td class="p-2">{{$workout->distance}} km</td>
+                <td class="p-2">{{$workout->speed}} km/h</td>
                 <td class="p-2">{{$workout->duration}}</td>
+                <td class="p-2">{{$workout->energy}} kJ</td>
+                <td class="p-2">{{$workout->avg_power}} W</td>
+                <td class="p-2">{{$workout->avg_hr}}</td>
                 <td class="p-2">
                     <div class="form-inline">
                         <a href="{{action('WorkoutsController@edit', [ 'workout' => $workout ])}}" class="btn btn-warning mr-2 btn-sm">Edit</a>

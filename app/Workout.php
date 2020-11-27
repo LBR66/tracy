@@ -57,9 +57,12 @@ class Workout extends Model
                 min(points.heart_rate) as min_hr,
                 max(points.heart_rate) as max_hr,
                 avg(points.heart_rate) as avg_hr,
+                avg(points.cadence) as avg_cadence,
+                avg(points.power) as avg_power,
                 min(points.elevation) as min_elevation,
                 max(points.elevation) as max_elevation,
-                max(points.power) 	  as max_power'
+                max(points.power) 	  as max_power,
+                sum(points.power)/1000 as sum_energy'
             ))
                 ->join('points AS B', function ($join) {
                     $join->on('points.index', '=', DB::raw('B.index - 1'));
@@ -137,6 +140,13 @@ class Workout extends Model
         return $this->params->min_hr;
     }
 
+    public function getAvgHrAttribute()
+    {
+        $this->calculateParams();
+
+        return $this->params->avg_hr;
+    }
+
     public function getMaxElevationAttribute()
     {
         $this->calculateParams();
@@ -153,18 +163,61 @@ class Workout extends Model
         return $this->params->min_elevation;
     }
 
-    public function getAvgHrAttribute()
+    public function getAvgCadenceAttribute()
     {
         $this->calculateParams();
 
-        return round($this->params->avg_hr);
+        return round($this->params->avg_cadence);
     }
 
+    public function getAvgPowerAttribute()
+    {
+        $this->calculateParams();
+
+        return round($this->params->avg_power);
+    }
+
+    public function getMaxPowerAttribute()
+    {
+        $this->calculateParams();
+
+        return round($this->params->max_power);
+    }
+    
+    public function getSumEnergyAttribute()
+    {
+        $this->calculateParams();
+
+        return round($this->params->sum_energy);
+    }
     public function getTypeAttribute($type)
     {
         return $this->types[$type];
     }
 
+    public function updateWorkouts($id)
+    {
+       $data = [];
+       $power= $this->getSumEnergyAttribute();
+       #HIER!
+       $workout = Workout::where(['id' => $id])->first();
+
+        $workout->fill([ 
+            'energy' => $this->getSumEnergyAttribute(),
+            'distance' => $this->getDistanceAttribute(),
+            'avg_power' => $this->getAvgPowerAttribute(),
+            'max_power' => $this->getMaxPowerAttribute(),
+            'avg_cad' => $this->getAvgCadenceAttribute(),
+            #'max_cad' => $this->getMaxCadenceAttribute(),
+            'max_hr' => $this->getMaxHrAttribute(),
+            'avg_hr' => $this->getAvgHrAttribute()
+        ]);
+       
+        $workout->save();
+
+
+        return;
+    }
     public function savePoints(\Iterator $points)
     {
         $data = [];
@@ -185,6 +238,8 @@ class Workout extends Model
 
         return $this->points()->saveMany($data);
     }
+
+
 
     public function getTimeAttribute($time)
     {

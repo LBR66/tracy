@@ -27,6 +27,7 @@ class WorkoutResource extends JsonResource
             'avghr' => $this->avghr,
             'minhr' => $this->minhr,
             'maxhr' => $this->maxhr,
+            'maxpower' => $this->maxpower
 
         ]);
 

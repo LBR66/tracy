@@ -86,7 +86,7 @@ class WorkoutsController extends Controller
 
         $parser = ParserFactory::create($path);
         $data = $parser->parse($path);
-
+        
         $workout = [
             'title' => $parser->getType() ?? 'New workout',
             'type' => $request->type,
@@ -95,9 +95,11 @@ class WorkoutsController extends Controller
             'user_id' => Auth::id(),
             'status' => Workout::STATUS_ACTIVE
         ];
-
+        
         $workout = Workout::create($workout);
+      
         $workout->savePoints($parser);
+        $workout->updateWorkouts($workout->id);
 
         return redirect(action('WorkoutsController@edit', [ 'workout' => $workout ]));
     }
@@ -167,7 +169,7 @@ class WorkoutsController extends Controller
             'type' => $request->type,
             'status' => Workout::STATUS_ACTIVE
         ]);
-
+       
         if ($workout->save()) {
             $request->session()->flash('status', 'Workout saved!');
         } else {

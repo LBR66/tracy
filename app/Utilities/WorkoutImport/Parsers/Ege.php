@@ -86,10 +86,10 @@ class Ege extends Parser implements \Iterator, ParserInterface
                         $heartrate = $xmlReader->getAttribute('heartrate');
                         $cadence = $xmlReader->getAttribute('cadence');
                         $speed = $xmlReader->getAttribute('speed');
-                        $phys_energy = $xmlReader->getAttribute('phys-energy');
+                        #$phys_energy = $xmlReader->getAttribute('phys-energy');
                         $value = $xmlReader->getAttribute('value');
-                        $temperature = $xmlReader->getAttribute('temperature');
-                        $slope = $xmlReader->getAttribute('slope');
+                        #$temperature = $xmlReader->getAttribute('temperature');
+                        #$slope = $xmlReader->getAttribute('slope');
                         $latp = round($xmlReader->getAttribute('lat'),6);
                         $lonp = round($xmlReader->getAttribute('lon'),6);  
 
