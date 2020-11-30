@@ -24,7 +24,6 @@
                         <div>Average heart rate: <h5>{{$workout->avghr}} bpm</h5></div>
                         <div>Min heart rate: <h5>{{$workout->minhr}} bpm</h5></div>
                         <div>Max heart rate: <h5>{{$workout->maxhr}} bpm</h5></div>
-                        <div>Average heart rate: <h5>{{$workout->avghr}} bpm</h5></div>
                     </div>
                 </div>
             </div>

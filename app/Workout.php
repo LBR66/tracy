@@ -46,7 +46,6 @@ class Workout extends Model
         });
     }
 
-
     protected $params = null;
 
     private function calculateParams()
@@ -58,6 +57,7 @@ class Workout extends Model
                 max(points.heart_rate) as max_hr,
                 avg(points.heart_rate) as avg_hr,
                 avg(points.cadence) as avg_cadence,
+                max(points.cadence) as max_cadence,
                 avg(points.power) as avg_power,
                 min(points.elevation) as min_elevation,
                 max(points.elevation) as max_elevation,
@@ -102,21 +102,18 @@ class Workout extends Model
     public function getDurationAttribute()
     {
         $this->calculateParams();
-
         return date('H:i:s', $this->params->duration);
     }
 
     public function getDistanceAttribute()
     {
         $this->calculateParams();
-
         return Round($this->params->distance / 1000, 2);
     }
 
     public function getAvgSpeedAttribute()
     {
         $this->calculateParams();
-
         $time = $this->params->duration;
         $avgSpeed = 0;
 
@@ -129,28 +126,24 @@ class Workout extends Model
     public function getMaxHrAttribute()
     {
         $this->calculateParams();
-
         return $this->params->max_hr;
     }
 
     public function getMinHrAttribute()
     {
         $this->calculateParams();
-
         return $this->params->min_hr;
     }
 
     public function getAvgHrAttribute()
     {
         $this->calculateParams();
-
         return $this->params->avg_hr;
     }
 
     public function getMaxElevationAttribute()
     {
         $this->calculateParams();
-
         $this->attributes['maxelevation'] = $this->params->max_elevation;
         return $this->params->max_elevation;
     }
@@ -158,7 +151,6 @@ class Workout extends Model
     public function getMinElevationAttribute()
     {
         $this->calculateParams();
-
         $this->attributes['minelevation'] = $this->params->min_elevation;
         return $this->params->min_elevation;
     }
@@ -170,24 +162,28 @@ class Workout extends Model
         return round($this->params->avg_cadence);
     }
 
-    public function getAvgPowerAttribute()
+    public function getMaxCadenceAttribute()
     {
         $this->calculateParams();
 
+        return round($this->params->max_cadence);
+    }
+
+    public function getAvgPowerAttribute()
+    {
+        $this->calculateParams();
         return round($this->params->avg_power);
     }
 
     public function getMaxPowerAttribute()
     {
         $this->calculateParams();
-
         return round($this->params->max_power);
     }
     
     public function getSumEnergyAttribute()
     {
         $this->calculateParams();
-
         return round($this->params->sum_energy);
     }
     public function getTypeAttribute($type)
@@ -199,7 +195,6 @@ class Workout extends Model
     {
        $data = [];
        $power= $this->getSumEnergyAttribute();
-       #HIER!
        $workout = Workout::where(['id' => $id])->first();
 
         $workout->fill([ 
@@ -208,16 +203,15 @@ class Workout extends Model
             'avg_power' => $this->getAvgPowerAttribute(),
             'max_power' => $this->getMaxPowerAttribute(),
             'avg_cad' => $this->getAvgCadenceAttribute(),
-            #'max_cad' => $this->getMaxCadenceAttribute(),
+            'max_cad' => $this->getMaxCadenceAttribute(),
             'max_hr' => $this->getMaxHrAttribute(),
             'avg_hr' => $this->getAvgHrAttribute()
         ]);
        
         $workout->save();
-
-
         return;
     }
+    
     public function savePoints(\Iterator $points)
     {
         $data = [];

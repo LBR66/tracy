@@ -8,6 +8,7 @@ use DebugBar\DebugBar;
 use Illuminate\Http\Request;
 use App\Workout;
 use App\Point;
+use App\Event;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use App\Utilities\WorkoutImport\Parsers\Gpx;
@@ -97,10 +98,11 @@ class WorkoutsController extends Controller
         ];
         
         $workout = Workout::create($workout);
-      
+    
         $workout->savePoints($parser);
         $workout->updateWorkouts($workout->id);
-
+        #$event = Event::create($event);
+        #$event->createEvent($workout->id);
         return redirect(action('WorkoutsController@edit', [ 'workout' => $workout ]));
     }
 

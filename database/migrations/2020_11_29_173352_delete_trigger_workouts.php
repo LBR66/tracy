@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PointsPowerField extends Migration
+class DeleteTriggerWorkouts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class PointsPowerField extends Migration
      */
     public function up()
     {
-        Schema::table('points', function (Blueprint $table) {
-            $table->integer('power')->after('elevation')->nullable();
-          
-        });
-
+        DB::unprepared(' 
+        create trigger tr_DeleteTriggerWorkouts AFTER DELETE ON workouts FOR EACH ROW
+            DELETE FROM events
+            WHERE events.workout_id= workouts.id;
+        ');
     }
 
     /**
@@ -27,9 +27,6 @@ class PointsPowerField extends Migration
      */
     public function down()
     {
-           Schema::table('points', function (Blueprint $table) {
-          $table->dropColumn('power');
-        
-        });
+      DB::unprepared('DROP TRIGGER `tr_DeleteTriggerWorkouts`');
     }
 }

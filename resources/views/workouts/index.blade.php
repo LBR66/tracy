@@ -34,7 +34,7 @@
                 <td class="p-2">{{$workout->type}}</td>
                 <td class="p-2">{{$workout->time}}</td>
                 <td class="p-2">{{$workout->distance}} km</td>
-                <td class="p-2">{{$workout->speed}} km/h</td>
+                <td class="p-2">{{$workout->avgspeed}} km/h</td>
                 <td class="p-2">{{$workout->duration}}</td>
                 <td class="p-2">{{$workout->energy}} kJ</td>
                 <td class="p-2">{{$workout->avg_power}} W</td>
@@ -51,6 +51,18 @@
                 </td>
             </tr>
         @endforeach
+            <tr>
+                <td class="p-2">Summary</td>
+                <td class="p-2"></td>
+                <td class="p-2"></td>
+                <td class="p-2">{{$workout->sum('distance')}} km</td>
+                <td class="p-2"></td>
+                <td class="p-2"></td>
+                <td class="p-2">{{$workout->sum('energy')}} kJ</td>
+                <td class="p-2"></td>
+                <td class="p-2"></td>
+                <td class="p-2"></td> 
+            </tr>
         </tbody>
     </table>
 {{--    {{ $workouts->links() }}--}}

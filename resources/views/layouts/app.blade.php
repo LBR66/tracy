@@ -25,13 +25,19 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/highcharts/highcharts.js') }}" defer></script>
     <script src="{{ asset('js/datatables.min.js') }}" defer></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+    
     <!-- Styles -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/brands.css" integrity="sha384-SYNjKRRe+vDW0KSn/LrkhG++hqCLJg9ev1jIh8CHKuEA132pgAz+WofmKAhPpTR7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/fontawesome.css" integrity="sha384-0b7ERybvrT5RZyD80ojw6KNKz6nIAlgOKXIcJ0CV7A6Iia8yt2y1bBfLBOwoc9fQ" crossorigin="anonymous">
     <link href="{{ asset('css/vendor/datatables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/vendor/leaflet.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" />
+    
 
 </head>
 <body>
@@ -55,8 +61,18 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="nav-link dropdown-item" href="{{ action('WorkoutsController@create') }}">{{ __('Import') }}</a>
                                 <a class="nav-link dropdown-item" href="{{ action('WorkoutsController@index') }}">{{ __('History') }}</a>
+                               
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Calendar+Graph <span class="caret"></span>
+                            </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                   
+                                    <a class="nav-link dropdown-item" href="{{ action('FullCalendarController@index') }}">{{ __('Calendar') }}</a>
+                                </div>
+                            </li>
                         @can('admin')
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
